@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: Montserrat;
+        src: url(assets/fonts/Montserrat-Medium.woff) format('woff');
+    }
+}
+
+/* :root{
+    --very_small: 200;
+} */
+
+body {
+    font-family: 'Montserrat', serif;
+}
+
+.navbar-fixed{
+    @apply fixed z-[9999] bg-white bg-opacity-0 backdrop-blur-sm ;
+    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.1);
+}
+
+.hamburger-line {
+    @apply w-[30px] h-[2px] my-2 block bg-black dark:bg-black;
+}
+
+.hamburger-active > span:nth-child(1){
+    @apply -rotate-45;
+}
+.hamburger-active > span:nth-child(2){
+    @apply scale-0;
+}
+.hamburger-active > span:nth-child(3){
+    @apply rotate-45 ;
+}
+#hero>div {
+    background-image:url(../dist/assets/img/bg.svg);
+}
+#dark-toggle:checked ~ label div.toggle-round{
+    @apply translate-x-3 bg-dark-primary;
+}
+
+#dark-toggle:checked ~ label div.toggle-bg{
+    @apply bg-black;
+}
+
+@keyframes highlightFadeIn {
+    0% {@apply opacity-0}
+    100% {@apply opacity-40}
+}
+@keyframes highlightFadeOut {
+    0% {@apply opacity-40}
+    100% {@apply opacity-0}
+}
+@keyframes highlightTextOut {
+    0% {@apply bottom-1/2 -translate-y-1/2}
+    100% {@apply -bottom-20}
+}
+@keyframes highlightTextIn {
+    0% {@apply -bottom-20}
+    100% {@apply bottom-1/2 -translate-y-1/2}
+}
+.arrow {
+    @apply bg-dark-secondary text-light-primary dark:text-dark-secondary dark:bg-light-primary
+}
+.arrow-fadein {
+    @apply bg-light-primary text-dark-secondary dark:bg-dark-secondary dark:text-light-primary animate-arrowFadeInLight dark:animate-arrowFadeInDark;
+}
+.arrow-fadeout {
+    @apply bg-dark-secondary text-light-primary dark:bg-light-primary dark:text-dark-secondary animate-arrowFadeOutLight dark:animate-arrowFadeOutDark;
+    animation: arrowFadeOut 0.3s ease-in-out;
+}
+
+.carousel :where(.card, .image) {
+    @apply flex items-center justify-center;
+}
+
+.wrapper .arrow, .wrapper2 .arrow {
+    @apply cursor-pointer absolute top-1/2;
+    transform: translateY(-50%);
+}
+
+.wrapper .carousel {
+    @apply grid grid-flow-col justify-start flex-col overflow-hidden scroll-smooth auto-cols-[calc(100%)] sm:auto-cols-[calc(100%/2)] lg:auto-cols-[calc(100%/3)];
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.highlight {
+    @apply opacity-40;
+    animation: highlightFadeIn 200ms ease-in-out;
+}
+.no-highlight {
+    @apply opacity-0;
+    animation: highlightFadeOut 200ms ease-in-out;
+}
+.highlight-text {
+    @apply bottom-1/2 -translate-y-1/2;
+    animation: highlightTextIn 200ms ease-in-out;
+}
+.no-highlight-text {
+    @apply -bottom-20;
+    animation: highlightTextOut 200ms ease-in-out;
+}
+.wrapper2 .article {
+    @apply grid grid-flow-col justify-start flex-col overflow-hidden scroll-smooth auto-cols-[calc(100%)] sm:auto-cols-[calc(100%/2)] lg:auto-cols-[calc(100%/3)];
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.article.dragging .article-card {
+    @apply cursor-grab select-none
+}
+.article.dragging {
+    @apply scroll-auto
+}
+.article.no-transition{
+    @apply scroll-auto
+}
+.article::-webkit-scrollbar {
+    @apply hidden
+}
+.article .article-card {
+    @apply list-none cursor-pointer /*snap-start*/
+}
+.wrapper3 .comment {
+    @apply grid grid-flow-col justify-start overflow-hidden scroll-smooth auto-cols-[calc(100%)];
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.article .comment-card {
+    @apply list-none
+}
